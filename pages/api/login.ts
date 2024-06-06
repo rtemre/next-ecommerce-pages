@@ -1,4 +1,4 @@
-import type { NextApiRequest, NextApiResponse } from 'next';
+import type { NextApiRequest, NextApiResponse } from "next";
 
 // fake login
 export default (req: NextApiRequest, res: NextApiResponse) => {
@@ -6,9 +6,9 @@ export default (req: NextApiRequest, res: NextApiResponse) => {
   const email = request.email;
   const password = request.password;
 
-  if(email === 'johndoe@mail.com' && password === 'ecommerce') {
+  if (email === "johndoe@mail.com" && password === "ecommerce") {
     res.status(200).json({ status: true });
   } else {
     res.status(401).json({ status: false });
   }
-}
+};
