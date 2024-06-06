@@ -1,22 +1,22 @@
-import { GetServerSideProps } from 'next'
+import { GetServerSideProps } from "next";
 
-import { useState } from 'react';
-import Footer from '../../components/footer';
-import Layout from '../../layouts/Main';
-import Breadcrumb from '../../components/breadcrumb';
-import ProductsFeatured from '../../components/products-featured';
-import Gallery from '../../components/product-single/gallery';
-import Content from '../../components/product-single/content';
-import Description from '../../components/product-single/description';
-import Reviews from '../../components/product-single/reviews';
-import { server } from '../../utils/server'; 
+import { useState } from "react";
+import Footer from "../../components/footer";
+import Layout from "../../layouts/Main";
+import Breadcrumb from "../../components/breadcrumb";
+import ProductsFeatured from "../../components/products-featured";
+import Gallery from "../../components/product-single/gallery";
+import Content from "../../components/product-single/content";
+import Description from "../../components/product-single/description";
+import Reviews from "../../components/product-single/reviews";
+import { server } from "../../utils/server";
 
 // types
-import { ProductType } from 'types';
+import { ProductType } from "types";
 
 type ProductPageType = {
   product: ProductType;
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async ({ query }) => {
   const pid = query.pid;
@@ -27,11 +27,11 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
     props: {
       product,
     },
-  }
-}
+  };
+};
 
 const Product = ({ product }: ProductPageType) => {
-  const [showBlock, setShowBlock] = useState('description');
+  const [showBlock, setShowBlock] = useState("description");
 
   return (
     <Layout>
@@ -46,12 +46,28 @@ const Product = ({ product }: ProductPageType) => {
 
           <div className="product-single__info">
             <div className="product-single__info-btns">
-              <button type="button" onClick={() => setShowBlock('description')} className={`btn btn--rounded ${showBlock === 'description' ? 'btn--active' : ''}`}>Description</button>
-              <button type="button" onClick={() => setShowBlock('reviews')} className={`btn btn--rounded ${showBlock === 'reviews' ? 'btn--active' : ''}`}>Reviews (2)</button>
+              <button
+                type="button"
+                onClick={() => setShowBlock("description")}
+                className={`btn btn--rounded ${
+                  showBlock === "description" ? "btn--active" : ""
+                }`}
+              >
+                Description
+              </button>
+              <button
+                type="button"
+                onClick={() => setShowBlock("reviews")}
+                className={`btn btn--rounded ${
+                  showBlock === "reviews" ? "btn--active" : ""
+                }`}
+              >
+                Reviews (2)
+              </button>
             </div>
 
-            <Description show={showBlock === 'description'} />
-            <Reviews product={product} show={showBlock === 'reviews'} />
+            <Description show={showBlock === "description"} />
+            <Reviews product={product} show={showBlock === "reviews"} />
           </div>
         </div>
       </section>
@@ -62,6 +78,6 @@ const Product = ({ product }: ProductPageType) => {
       <Footer />
     </Layout>
   );
-}
+};
 
-export default Product
+export default Product;
