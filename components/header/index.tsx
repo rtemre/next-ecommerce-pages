@@ -52,15 +52,15 @@ const Header = ({ isErrorPage }: HeaderType) => {
   useOnClickOutside(navRef, closeMenu);
   useOnClickOutside(searchRef, closeSearch);
 
-  return(
+  return (
     <header className={`site-header ${!onTop ? 'site-header--fixed' : ''}`}>
       <div className="container">
         <Link href="/">
-          <a><h1 className="site-logo"><Logo />E-Shop</h1></a>
+          <h1 className="site-logo"><Logo />E-Shop</h1>
         </Link>
         <nav ref={navRef} className={`site-nav ${menuOpen ? 'site-nav--open' : ''}`}>
           <Link href="/products">
-            <a>Products</a>
+            Products
           </Link>
           <a href="#">Inspiration</a>
           <a href="#">Rooms</a>
@@ -75,7 +75,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
             </form>  
             <i onClick={() => setSearchOpen(!searchOpen)}  className="icon-search"></i>
           </button>
-          <Link href="/cart">
+          <Link href="/cart" legacyBehavior>
             <button className="btn-cart">
               <i className="icon-cart"></i>
               {cartItems.length > 0 && 
@@ -83,7 +83,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
               }
             </button>
           </Link>
-          <Link href="/login">
+          <Link href="/login" legacyBehavior>
             <button className="site-header__btn-avatar"><i className="icon-avatar"></i></button>
           </Link>
           <button 
@@ -94,7 +94,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
         </div>
       </div>
     </header>
-  )
+  );
 };
 
 
