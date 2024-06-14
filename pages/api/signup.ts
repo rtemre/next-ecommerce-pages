@@ -2,21 +2,8 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { connectToDatabase } from "../../lib/db";
 import { hasPassword } from "../../lib/auth";
 
-// fake login
-// export default (req: NextApiRequest, res: NextApiResponse) => {
-//   const request = req.body;
-//   const email = request.email;
-//   const password = request.password;
-
-//   if (email === "johndoe@mail.com" && password === "ecommerce") {
-//     res.status(200).json({ status: true });
-//   } else {
-//     res.status(401).json({ status: false });
-//   }
-// };
-
 async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const { email, password } = req.body;
+  const { email, password, firstname, lastname } = req.body;
 
   if (
     !email ||
@@ -32,13 +19,17 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   const hashedPassword = await hasPassword(password);
 
+  console.log("hashedPassword", hashedPassword);
+
   const client = await connectToDatabase();
   const db = client.db("ecom");
   db.collection("user").insertOne({
     email: email,
     password: hashedPassword,
+    firstname: firstname,
+    lastname: lastname,
   });
-  res.status(201).json({ message: "Successfully LoggedIn!" });
+  res.status(201).json({ message: "Created user successfully!" });
 }
 
 export default handler;
