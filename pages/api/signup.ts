@@ -17,12 +17,20 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     return;
   }
 
-  const hashedPassword = await hasPassword(password);
-
-  console.log("hashedPassword", hashedPassword);
-
   const client = await connectToDatabase();
   const db = client.db("ecom");
+
+  const existingUser = await db.collection("user").findOne({ email: email });
+
+  if (existingUser) {
+    res.status(422).json({ message: "User already exists!" });
+    client.close();
+    return;
+  }
+  const hashedPassword = await hasPassword(password);
+
+  //   console.log("hashedPassword", hashedPassword);
+
   db.collection("user").insertOne({
     email: email,
     password: hashedPassword,
@@ -30,6 +38,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
     lastname: lastname,
   });
   res.status(201).json({ message: "Created user successfully!" });
+  client.close();
 }
 
 export default handler;
