@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Router from "next/router";
+import { SessionProvider } from "next-auth/react";
 import { wrapper } from "../store";
 
 // types
@@ -21,9 +22,14 @@ if (isProduction) {
   Router.events.on("routeChangeComplete", (url: string) => gtag.pageview(url));
 }
 
-const MyApp = ({ Component, pageProps }: AppProps) => (
+const MyApp = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => (
   <Fragment>
-    <Component {...pageProps} />
+    <SessionProvider session={session} refetchInterval={0}>
+      <Component {...pageProps} />
+    </SessionProvider>
   </Fragment>
 );
 

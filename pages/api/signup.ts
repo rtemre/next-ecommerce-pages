@@ -31,7 +31,7 @@ async function handler(req: NextApiRequest, res: NextApiResponse) {
 
   //   console.log("hashedPassword", hashedPassword);
 
-  db.collection("user").insertOne({
+  await db.collection("user").insertOne({
     email: email,
     password: hashedPassword,
     firstname: firstname,

@@ -1,8 +1,10 @@
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { server } from "../utils/server";
-import { postData } from "../utils/services";
+// import { server } from "../utils/server";
+// import { postData } from "../utils/services";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
 
 // type LoginMail = {
 //   email: string;
@@ -16,15 +18,23 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {
-    console.log("data ===>", data);
+  const router = useRouter();
 
-    const res = await postData(`${server}/api/login`, {
+  const onSubmit = async (data: any) => {
+    const result = await signIn("credentials", {
+      redirect: false,
       email: data.email,
       password: data.password,
     });
 
-    console.log(res);
+    if (result?.error === null) {
+      router.push("/");
+    }
+
+    // const res = await postData(`${server}/api/login`, {
+    //   email: data.email,
+    //   password: data.password,
+    // });
   };
 
   return (
