@@ -1,5 +1,6 @@
 import React, { Fragment } from "react";
 import Router from "next/router";
+import { Provider } from "react-redux";
 import { SessionProvider } from "next-auth/react";
 import { wrapper } from "../store";
 
@@ -25,12 +26,17 @@ if (isProduction) {
 const MyApp = ({
   Component,
   pageProps: { session, ...pageProps },
-}: AppProps) => (
-  <Fragment>
-    <SessionProvider session={session} refetchInterval={0}>
-      <Component {...pageProps} />
-    </SessionProvider>
-  </Fragment>
-);
+}: AppProps) => {
+  const { store } = wrapper.useWrappedStore(pageProps);
+  return (
+    <Fragment>
+      <Provider store={store}>
+        <SessionProvider session={session} refetchInterval={0}>
+          <Component {...pageProps} />
+        </SessionProvider>
+      </Provider>
+    </Fragment>
+  );
+};
 
-export default wrapper.withRedux(MyApp);
+export default MyApp;
