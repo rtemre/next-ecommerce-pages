@@ -3,7 +3,16 @@ import { createWrapper } from "next-redux-wrapper";
 import cartReducer from "./reducers/cart";
 import userReducer from "./reducers/user";
 import storage from "redux-persist/lib/storage";
-import { persistStore, persistReducer } from "redux-persist";
+import {
+  persistStore,
+  persistReducer,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from "redux-persist";
 
 //COMBINING ALL REDUCERS
 const reducer = {
@@ -35,9 +44,16 @@ const makeStore = ({ isServer }: { isServer: Boolean }) => {
     };
 
     const persistedReducer = persistReducer(persistConfig, rootReducer); // Create a new reducer with our existing reducer
-
+    // @ts-ignore:next-line
+    // Add middleware to fix the refered issue. Refered: https://github.com/rt2zz/redux-persist/issues/1455
     store = configureStore({
       reducer: persistedReducer,
+      middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+          serializableCheck: {
+            ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+          },
+        }),
     }); // Creating the store again
 
     // @ts-ignore:next-line
@@ -49,7 +65,8 @@ const makeStore = ({ isServer }: { isServer: Boolean }) => {
 
 // export an assembled wrapper
 // @ts-ignore:next-line
-export const wrapper = createWrapper(makeStore, { debug: true });
+// FOR NOW passing the {debug: false} but if want then we can enable it.
+export const wrapper = createWrapper(makeStore, { debug: false });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself
 export type RootState = ReturnType<typeof store.getState>;
