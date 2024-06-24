@@ -5,12 +5,14 @@ import Logo from "../../assets/icons/logo";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { RootState } from "store";
+import { useSession, signOut } from "next-auth/react";
 
 type HeaderType = {
   isErrorPage?: Boolean;
 };
 
 const Header = ({ isErrorPage }: HeaderType) => {
+  const { data: session } = useSession();
   const router = useRouter();
   const { cartItems } = useSelector((state: RootState) => state.cart);
   const arrayPaths = ["/"];
@@ -53,6 +55,10 @@ const Header = ({ isErrorPage }: HeaderType) => {
   // on click outside
   useOnClickOutside(navRef, closeMenu);
   useOnClickOutside(searchRef, closeSearch);
+
+  const logouthandler = () => {
+    signOut();
+  };
 
   return (
     <header className={`site-header ${!onTop ? "site-header--fixed" : ""}`}>
@@ -104,11 +110,18 @@ const Header = ({ isErrorPage }: HeaderType) => {
               )}
             </button>
           </Link>
-          <Link href="/login" legacyBehavior>
-            <button className="site-header__btn-avatar">
-              <i className="icon-avatar"></i>
+          {session && session?.user ? (
+            <button className="site-header__btn-avatar" onClick={logouthandler}>
+              Logout
+              <i className="icon-logout"></i>
             </button>
-          </Link>
+          ) : (
+            <Link href="/login" legacyBehavior>
+              <button className="site-header__btn-avatar">
+                <i className="icon-avatar"></i>
+              </button>
+            </Link>
+          )}
           <button
             onClick={() => setMenuOpen(true)}
             className="site-header__btn-menu"
