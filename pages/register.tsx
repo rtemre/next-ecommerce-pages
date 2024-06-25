@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { server } from "../utils/server";
 import { postData } from "../utils/services";
+import { useRouter } from "next/router";
 
 export function getServerSideProps() {
   return {
@@ -11,6 +12,7 @@ export function getServerSideProps() {
 }
 
 const RegisterPage = () => {
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -18,16 +20,15 @@ const RegisterPage = () => {
   } = useForm();
 
   const onSubmit = async (data: any) => {
-    console.log("data ===>", data);
-
-    const res = await postData(`${server}/api/signup`, {
+    const result = await postData(`${server}/api/signup`, {
       firstname: data.firstname,
       lastname: data.lastname,
       email: data.email,
       password: data.password,
     });
-
-    console.log(res);
+    if (result) {
+      router.push("/login");
+    }
   };
 
   return (
@@ -44,11 +45,7 @@ const RegisterPage = () => {
             <h2 className="form-block__title">
               Create an account and discover the benefits
             </h2>
-            <p className="form-block__description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <p className="form-block__description"></p>
 
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__input-row">

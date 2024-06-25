@@ -82,10 +82,10 @@ const Footer = () => {
             <ul>
               <li>Contact</li>
               <li>
-                <a href="#">store@uikit.com</a>
+                <a href="#">ecom.shop@gmail.com</a>
               </li>
               <li>
-                <a href="#">Hotline: +1 131 138 138</a>
+                <a href="#">Mobile +91 99269-96296</a>
               </li>
             </ul>
           </div>
@@ -94,7 +94,7 @@ const Footer = () => {
 
       <div className="site-footer__bottom">
         <div className="container">
-          <p>DESIGN BY ICEO.CO - © 2019. ALL RIGHTS RESERVED.</p>
+          <p>COPYRIGHT - © 2024. ALL RIGHTS RESERVED.</p>
         </div>
       </div>
     </footer>

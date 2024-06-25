@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useSelector } from "react-redux";
 import useOnClickOutside from "use-onclickoutside";
 import Logo from "../../assets/icons/logo";
+import LogoutSVG from "../../assets/icons/svgs";
+
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { RootState } from "store";
@@ -112,8 +114,8 @@ const Header = ({ isErrorPage }: HeaderType) => {
           </Link>
           {session && session?.user ? (
             <button className="site-header__btn-avatar" onClick={logouthandler}>
-              Logout
-              <i className="icon-logout"></i>
+              <LogoutSVG />
+              {/* <i className="icon-logout"></i> */}
             </button>
           ) : (
             <Link href="/login" legacyBehavior>
