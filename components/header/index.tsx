@@ -44,6 +44,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
     window.onscroll = function () {
       headerClass();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const closeMenu = () => {

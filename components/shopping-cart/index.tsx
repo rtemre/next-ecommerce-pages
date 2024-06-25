@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import CheckoutStatus from "../../components/checkout-status";
 import Item from "./item";
 import { RootState } from "store";
+import Link from "next/link";
 
 const ShoppingCart = () => {
   const { cartItems } = useSelector((state: RootState) => state.cart);
@@ -56,9 +57,9 @@ const ShoppingCart = () => {
         </div>
 
         <div className="cart-actions">
-          <a href="/products" className="cart__btn-back">
+          <Link href="/products" className="cart__btn-back">
             <i className="icon-left"></i> Continue Shopping
-          </a>
+          </Link>
           <input
             type="text"
             placeholder="Promo Code"
@@ -69,9 +70,12 @@ const ShoppingCart = () => {
             <p className="cart-actions__total">
               Total cost <strong>${priceTotal().toFixed(2)}</strong>
             </p>
-            <a href="/cart/checkout" className="btn btn--rounded btn--yellow">
+            <Link
+              href="/cart/checkout"
+              className="btn btn--rounded btn--yellow"
+            >
               Checkout
-            </a>
+            </Link>
           </div>
         </div>
       </div>
