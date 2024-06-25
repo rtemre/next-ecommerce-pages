@@ -2,6 +2,7 @@ import { verifyPassword } from "lib/auth";
 import { connectToDatabase } from "lib/db";
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
+import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
   session: {
@@ -53,5 +54,10 @@ export default NextAuth({
         }
       },
     }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
+    }),
   ],
+  secret: process.env.NEXTAUTH_SECRET,
 });

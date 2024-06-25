@@ -38,6 +38,11 @@ const LoginPage = () => {
     // });
   };
 
+  const handleGoogleSignIn = async () => {
+    await signIn("google");
+    // router.push("/");
+  };
+
   return (
     <Layout>
       <section className="form-page">
@@ -122,7 +127,11 @@ const LoginPage = () => {
                 <button type="button" className="btn-social fb-btn">
                   <i className="icon-facebook"></i>Facebook
                 </button>
-                <button type="button" className="btn-social google-btn">
+                <button
+                  type="button"
+                  className="btn-social google-btn"
+                  onClick={handleGoogleSignIn}
+                >
                   <Image
                     src="/images/icons/gmail.svg"
                     alt="gmail"

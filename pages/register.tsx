@@ -5,11 +5,11 @@ import { server } from "../utils/server";
 import { postData } from "../utils/services";
 import { useRouter } from "next/router";
 
-export function getServerSideProps() {
-  return {
-    props: {},
-  };
-}
+// export function getServerSideProps() {
+//   return {
+//     props: {},
+//   };
+// }
 
 const RegisterPage = () => {
   const router = useRouter();
