@@ -10,7 +10,7 @@ const CheckoutItems = () => {
         <li key={item.id} className="checkout-item">
           <div className="checkout-item__content">
             <div className="checkout-item__img">
-              <Image src={item.thumb} alt="" fill />
+              <Image src={item.thumb} alt="" width={51} height={51} />
             </div>
 
             <div className="checkout-item__data">

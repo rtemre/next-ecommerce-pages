@@ -54,7 +54,7 @@ const ShoppingCart = ({
       <td>
         <div className="cart-product">
           <div className="cart-product__img">
-            <Image src={thumb} alt="" fill />
+            <Image src={thumb} alt="" width={70} height={70} />
           </div>
 
           <div className="cart-product__content">

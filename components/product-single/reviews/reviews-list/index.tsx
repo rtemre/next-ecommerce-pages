@@ -13,7 +13,7 @@ const ReviewsList = ({ reviews }: ReviewsListType) => {
       {reviews.map((review, index) => (
         <div key={index} className="review-item">
           <div className="review__avatar">
-            <Image src={review.avatar} alt="avatar" fill />
+            <Image src={review.avatar} alt="avatar" width={40} height={40} />
           </div>
 
           <div className="review__content">
