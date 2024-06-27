@@ -7,7 +7,7 @@ type LayoutType = {
   children?: React.ReactNode;
 };
 
-export default ({ children, title = "Next.js Ecommerce" }: LayoutType) => {
+const NotFound = ({ children, title = "Next.js Ecommerce" }: LayoutType) => {
   const router = useRouter();
   const pathname = router.pathname;
 
@@ -23,3 +23,4 @@ export default ({ children, title = "Next.js Ecommerce" }: LayoutType) => {
     </div>
   );
 };
+export default NotFound;

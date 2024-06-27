@@ -83,8 +83,8 @@ const IndexPage = () => {
               <div className="data-item__content">
                 <h4>Money-Back Guarantee</h4>
                 <p>
-                  If an item arrived damaged or you've changed your mind, you
-                  can send it back for a full refund.
+                  If an item arrived damaged or you&apos;ve changed your mind,
+                  you can send it back for a full refund.
                 </p>
               </div>
             </li>

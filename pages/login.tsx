@@ -1,8 +1,11 @@
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { server } from "../utils/server";
-import { postData } from "../utils/services";
+// import { server } from "../utils/server";
+// import { postData } from "../utils/services";
+import { signIn } from "next-auth/react";
+import { useRouter } from "next/router";
+import Image from "next/image";
 
 // type LoginMail = {
 //   email: string;
@@ -16,15 +19,28 @@ const LoginPage = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = async (data: any) => {
-    console.log("data ===>", data);
+  const router = useRouter();
 
-    const res = await postData(`${server}/api/login`, {
+  const onSubmit = async (data: any) => {
+    const result = await signIn("credentials", {
+      redirect: false,
       email: data.email,
       password: data.password,
     });
 
-    console.log(res);
+    if (result?.error === null) {
+      router.push("/");
+    }
+
+    // const res = await postData(`${server}/api/login`, {
+    //   email: data.email,
+    //   password: data.password,
+    // });
+  };
+
+  const handleGoogleSignIn = async () => {
+    await signIn("google");
+    // router.push("/");
   };
 
   return (
@@ -39,11 +55,7 @@ const LoginPage = () => {
 
           <div className="form-block">
             <h2 className="form-block__title">Log in</h2>
-            <p className="form-block__description">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </p>
+            <p className="form-block__description"></p>
 
             <form className="form" onSubmit={handleSubmit(onSubmit)}>
               <div className="form__input-row">
@@ -103,20 +115,30 @@ const LoginPage = () => {
                     <p>Keep me signed in</p>
                   </label>
                 </div>
-                <a
+                <Link
                   href="/forgot-password"
                   className="form__info__forgot-password"
                 >
                   Forgot password?
-                </a>
+                </Link>
               </div>
 
               <div className="form__btns">
                 <button type="button" className="btn-social fb-btn">
                   <i className="icon-facebook"></i>Facebook
                 </button>
-                <button type="button" className="btn-social google-btn">
-                  <img src="/images/icons/gmail.svg" alt="gmail" /> Gmail
+                <button
+                  type="button"
+                  className="btn-social google-btn"
+                  onClick={handleGoogleSignIn}
+                >
+                  <Image
+                    src="/images/icons/gmail.svg"
+                    alt="gmail"
+                    width={25}
+                    height={25}
+                  />
+                  Gmail
                 </button>
               </div>
 
@@ -128,7 +150,7 @@ const LoginPage = () => {
               </button>
 
               <p className="form__signup-link">
-                Not a member yet? <a href="/register">Sign up</a>
+                Not a member yet? <Link href="/register">Sign up</Link>
               </p>
             </form>
           </div>

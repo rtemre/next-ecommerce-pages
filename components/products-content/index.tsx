@@ -8,7 +8,7 @@ const ProductsContent = () => {
     <section className="products-content">
       <div className="products-content__intro">
         <h2>
-          Men's Tops <span>(133)</span>
+          Men&apos;s Tops <span>(133)</span>
         </h2>
         <button
           type="button"

@@ -26,7 +26,7 @@ const PageIntro = () => {
         <SwiperSlide>
           <div
             className="page-intro__slide"
-            style={{ backgroundImage: "url('/images/slide-2.jpg')" }}
+            style={{ backgroundImage: "url('/images/slide-1.jpg')" }}
           >
             <div className="container">
               <div className="page-intro__slide__content">
@@ -55,7 +55,7 @@ const PageIntro = () => {
               <i className="icon-shipping"></i>
               <div className="data-item__content">
                 <h4>99% Satisfied Customers</h4>
-                <p>Our clients' opinions speak for themselves</p>
+                <p>Our clients opinions speak for themselves</p>
               </div>
             </li>
 
