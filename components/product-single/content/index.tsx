@@ -59,10 +59,10 @@ const Content = ({ product }: ProductContent) => {
   return (
     <section className="product-content">
       <div className="product-content__intro">
-        <h5 className="product__id">
+        {/* <h5 className="product__id">
           Product ID:<br></br>
           {product.id}
-        </h5>
+        </h5> */}
         <span className="product-on-sale">Sale</span>
         <h2 className="product__name">{product.name}</h2>
 

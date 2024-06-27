@@ -119,29 +119,29 @@ const CheckoutPage = () => {
                 <h3 className="block__title">Payment method</h3>
                 <ul className="round-options round-options--three">
                   <li className="round-item">
-                    <Image src="/images/logos/paypal.png" alt="Paypal" fill />
+                    <Image src="/images/logos/paypal.png" alt="Paypal" width={65} height={16} />
                   </li>
                   <li className="round-item">
-                    <Image src="/images/logos/visa.png" alt="Paypal" fill />
+                    <Image src="/images/logos/visa.png" alt="Paypal" width={41} height={13} />
                   </li>
                   <li className="round-item">
                     <Image
                       src="/images/logos/mastercard.png"
                       alt="Paypal"
-                      fill
+                      width={33} height={25}
                     />
                   </li>
                   <li className="round-item">
-                    <Image src="/images/logos/maestro.png" alt="Paypal" fill />
+                    <Image src="/images/logos/maestro.png" alt="Paypal" width={30} height={23} />
                   </li>
                   <li className="round-item">
-                    <Image src="/images/logos/discover.png" alt="Paypal" fill />
+                    <Image src="/images/logos/discover.png" alt="Paypal" width={53} height={9} />
                   </li>
                   <li className="round-item">
                     <Image
                       src="/images/logos/ideal-logo.svg"
                       alt="Paypal"
-                      fill
+                      width={34} height={30}
                     />
                   </li>
                 </ul>
@@ -151,19 +151,19 @@ const CheckoutPage = () => {
                 <h3 className="block__title">Delivery method</h3>
                 <ul className="round-options round-options--two">
                   <li className="round-item round-item--bg">
-                    <Image src="/images/logos/inpost.svg" alt="Paypal" fill />
+                    <Image src="/images/logos/inpost.svg" alt="Paypal" width={42} height={25} />
                     <p>$20.00</p>
                   </li>
                   <li className="round-item round-item--bg">
-                    <Image src="/images/logos/dpd.svg" alt="Paypal" fill />
+                    <Image src="/images/logos/dpd.svg" alt="Paypal" width={35} height={16} />
                     <p>$12.00</p>
                   </li>
                   <li className="round-item round-item--bg">
-                    <Image src="/images/logos/dhl.svg" alt="Paypal" fill />
+                    <Image src="/images/logos/dhl.svg" alt="Paypal" width={43} height={10} />
                     <p>$15.00</p>
                   </li>
                   <li className="round-item round-item--bg">
-                    <Image src="/images/logos/maestro.png" alt="Paypal" fill />
+                    <Image src="/images/logos/maestro.png" alt="Paypal" width={30} height={23} />
                     <p>$10.00</p>
                   </li>
                 </ul>
