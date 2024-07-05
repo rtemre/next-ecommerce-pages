@@ -1,4 +1,19 @@
+import { FormEvent } from "react";
+
 const Subscribe = () => {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData(event.currentTarget);
+    const email = formData.get("email");
+    await fetch("/api/subscribe", {
+      method: "POST",
+      body: JSON.stringify({ email }),
+      headers: {
+        "Content-Type": "appliction/json",
+      },
+    });
+  }
   return (
     <section className="subscribe">
       <div className="container">
@@ -10,8 +25,13 @@ const Subscribe = () => {
             Subscribe to our newsletter and receive exclusive offers every week
           </h4>
 
-          <form className="subscribe__form">
-            <input type="email" placeholder="Email address" />
+          <form className="subscribe__form" onSubmit={onSubmit}>
+            <input
+              type="email"
+              placeholder="Email address"
+              name="email"
+              required
+            />
             <button type="submit" className="btn btn--rounded btn--yellow">
               Subscribe
             </button>
