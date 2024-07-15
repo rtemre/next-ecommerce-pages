@@ -1,4 +1,5 @@
 import { FormEvent } from "react";
+import toast from "react-hot-toast";
 
 const Subscribe = () => {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -6,13 +7,20 @@ const Subscribe = () => {
 
     const formData = new FormData(event.currentTarget);
     const email = formData.get("email");
-    await fetch("/api/subscribe", {
+    const response = await fetch("/api/subscribe", {
       method: "POST",
       body: JSON.stringify({ email }),
       headers: {
         "Content-Type": "appliction/json",
       },
     });
+
+    if (response) {
+      const jsonData = response.json();
+      jsonData.then((data: any) =>
+        toast.success(data.message || "Successfully Subscribed!")
+      );
+    }
   }
   return (
     <section className="subscribe">

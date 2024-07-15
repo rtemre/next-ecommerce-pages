@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
+import toast from "react-hot-toast";
 
 // type LoginMail = {
 //   email: string;
@@ -30,6 +31,9 @@ const LoginPage = () => {
 
     if (result?.error === null) {
       router.push("/");
+      toast.success("Successfully LoggedIn!");
+    } else {
+      toast.error(result?.error || "Something Wrong!");
     }
 
     // const res = await postData(`${server}/api/login`, {

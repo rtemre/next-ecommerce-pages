@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { server } from "../utils/server";
 import { postData } from "../utils/services";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
 
 // export function getServerSideProps() {
 //   return {
@@ -28,6 +29,9 @@ const RegisterPage = () => {
     });
     if (result) {
       router.push("/login");
+      toast.success("Successfully Registered!");
+    } else {
+      toast.error("Something Wrong!");
     }
   };
 
