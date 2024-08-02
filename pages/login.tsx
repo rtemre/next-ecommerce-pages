@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
@@ -7,6 +8,7 @@ import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
 import toast from "react-hot-toast";
+import Loader from "../components/loader";
 
 // type LoginMail = {
 //   email: string;
@@ -21,8 +23,10 @@ const LoginPage = () => {
   } = useForm();
 
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     const result = await signIn("credentials", {
       redirect: false,
       email: data.email,
@@ -32,8 +36,10 @@ const LoginPage = () => {
     if (result?.error === null) {
       router.push("/");
       toast.success("Successfully LoggedIn!");
+      setIsLoading(true);
     } else {
       toast.error(result?.error || "Something Wrong!");
+      setIsLoading(true);
     }
 
     // const res = await postData(`${server}/api/login`, {
@@ -149,8 +155,9 @@ const LoginPage = () => {
               <button
                 type="submit"
                 className="btn btn--rounded btn--yellow btn-submit"
+                disabled={isLoading}
               >
-                Sign in
+                {isLoading ? <Loader /> : "Sign in"}
               </button>
 
               <p className="form__signup-link">
