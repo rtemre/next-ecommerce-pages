@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { RootState } from "store";
 import { useSession, signOut } from "next-auth/react";
+import toast from "react-hot-toast";
 
 type HeaderType = {
   isErrorPage?: Boolean;
@@ -61,6 +62,7 @@ const Header = ({ isErrorPage }: HeaderType) => {
 
   const logouthandler = () => {
     signOut();
+    toast.success("Logged Out!")
   };
 
   return (

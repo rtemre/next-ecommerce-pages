@@ -1,9 +1,12 @@
+import { useState } from "react";
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { server } from "../utils/server";
 import { postData } from "../utils/services";
 import { useRouter } from "next/router";
+import toast from "react-hot-toast";
+import Loader from "../components/loader";
 
 // export function getServerSideProps() {
 //   return {
@@ -18,8 +21,10 @@ const RegisterPage = () => {
     handleSubmit,
     // formState: { errors },
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: any) => {
+    setIsLoading(true);
     const result = await postData(`${server}/api/signup`, {
       firstname: data.firstname,
       lastname: data.lastname,
@@ -28,6 +33,11 @@ const RegisterPage = () => {
     });
     if (result) {
       router.push("/login");
+      toast.success("Successfully Registered!");
+      setIsLoading(false);
+    } else {
+      toast.error("Something Wrong!");
+      setIsLoading(false);
     }
   };
 
@@ -111,7 +121,7 @@ const RegisterPage = () => {
                 type="submit"
                 className="btn btn--rounded btn--yellow btn-submit"
               >
-                Sign up
+                {isLoading ? <Loader /> : "Sign up"}
               </button>
 
               <p className="form__signup-link">
