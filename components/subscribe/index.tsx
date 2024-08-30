@@ -24,22 +24,27 @@ const Subscribe = () => {
     //     toast.success(data.message || "Successfully Subscribed!")
     //   );
     // }
-    setIsLoading(true);
     const url = process.env.MAILCHIMP_URL;
-    jsonp(`${url}&EMAIL=${email}`, { param: "c" }, (_: any, data: any) => {
-      const { msg } = data;
-      if (data?.result === "error") {
-        if (msg?.includes(" - ")) {
-          toast.error(msg?.split(" - ")[1]);
+    try {
+      setIsLoading(true);
+      jsonp(`${url}&EMAIL=${email}`, { param: "c" }, (_: any, data: any) => {
+        const { msg } = data;
+        if (data?.result === "error") {
+          if (msg?.includes(" - ")) {
+            toast.error(msg?.split(" - ")[1]);
+          } else {
+            toast.error(msg);
+          }
+          setIsLoading(false);
         } else {
-          toast.error(msg);
+          setIsLoading(false);
+          toast.success(msg || "Successfully Subscribed!");
         }
-        setIsLoading(false);
-      } else {
-        setIsLoading(false);
-        toast.success(msg || "Successfully Subscribed!");
-      }
-    });
+      });
+    } catch (error: any) {
+      toast.error(error.message);
+      setIsLoading(false);
+    }
   }
   return (
     <section className="subscribe">
