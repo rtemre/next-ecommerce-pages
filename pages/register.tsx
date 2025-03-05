@@ -25,18 +25,20 @@ const RegisterPage = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
-    const result = await postData(`${server}/api/signup`, {
-      firstname: data.firstname,
-      lastname: data.lastname,
-      email: data.email,
-      password: data.password,
-    });
-    if (result) {
-      router.push("/login");
-      toast.success("Successfully Registered!");
+    try {
+      const result = await postData(`${server}/api/signup`, {
+        firstname: data.firstname,
+        lastname: data.lastname,
+        email: data.email,
+        password: data.password,
+      });
+      if (result?.message) {
+        router.push("/");
+        toast.success(result?.message || "Successfully LoggedIn!");
+      }
       setIsLoading(false);
-    } else {
-      toast.error("Something Wrong!");
+    } catch (error: any) {
+      toast.error(error?.message || "Something Went Wrong!");
       setIsLoading(false);
     }
   };

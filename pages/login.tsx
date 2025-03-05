@@ -27,19 +27,22 @@ const LoginPage = () => {
 
   const onSubmit = async (data: any) => {
     setIsLoading(true);
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: data.email,
-      password: data.password,
-    });
-
-    if (result?.error === null) {
-      router.push("/");
-      toast.success("Successfully LoggedIn!");
-      setIsLoading(true);
-    } else {
-      toast.error(result?.error || "Something Wrong!");
-      setIsLoading(true);
+    try {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email: data.email,
+        password: data.password,
+      });
+      if (result?.error === null) {
+        toast.success("Successfully LoggedIn!");
+        router.push("/");
+      } else {
+        toast.error(result?.error || "Something Went Wrong!");
+      }
+      setIsLoading(false);
+    } catch (error: any) {
+      toast.error(error.message || "Something Went Wrong!");
+      setIsLoading(false);
     }
 
     // const res = await postData(`${server}/api/login`, {

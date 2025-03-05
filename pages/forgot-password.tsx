@@ -3,6 +3,10 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { server } from "../utils/server";
 import { postData } from "../utils/services";
+import router from "next/router";
+import toast from "react-hot-toast";
+import { useState } from "react";
+import Loader from "components/loader";
 
 // type ForgotMail = {
 //   email: string;
@@ -14,13 +18,24 @@ const ForgotPassword = () => {
     handleSubmit,
     formState: { errors },
   } = useForm();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = async (data: any) => {
-    const res = await postData(`${server}/api/login`, {
-      email: data.email,
-    });
-
-    console.log(res);
+    setIsLoading(true);
+    try {
+      const result = await postData(`${server}/api/forgot-password`, {
+        email: data.email,
+        newPassword: data.password,
+      });
+      if (result?.message) {
+        router.push("/login");
+        toast.success(result?.message || "Successfully LoggedIn!");
+      }
+      setIsLoading(false);
+    } catch (error: any) {
+      toast.error(error?.message || "Something Went Wrong!");
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -85,7 +100,7 @@ const ForgotPassword = () => {
                 type="submit"
                 className="btn btn--rounded btn--yellow btn-submit"
               >
-                Reset password
+                {isLoading ? <Loader /> : "Reset password"}
               </button>
             </form>
           </div>
