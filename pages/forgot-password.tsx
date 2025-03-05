@@ -1,17 +1,11 @@
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { server } from "../utils/server";
 import { postData } from "../utils/services";
 import router from "next/router";
 import toast from "react-hot-toast";
 import { useState } from "react";
 import Loader from "components/loader";
-
-// type ForgotMail = {
-//   email: string;
-// }
-
 const ForgotPassword = () => {
   const {
     register,
@@ -23,7 +17,7 @@ const ForgotPassword = () => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-      const result = await postData(`${server}/api/forgot-password`, {
+      const result = await postData(`/api/forgot-password`, {
         email: data.email,
         newPassword: data.password,
       });

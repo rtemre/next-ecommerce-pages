@@ -2,7 +2,6 @@ import { useState } from "react";
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-import { server } from "../utils/server";
 import { postData } from "../utils/services";
 import { useRouter } from "next/router";
 import toast from "react-hot-toast";
@@ -26,7 +25,7 @@ const RegisterPage = () => {
   const onSubmit = async (data: any) => {
     setIsLoading(true);
     try {
-      const result = await postData(`${server}/api/signup`, {
+      const result = await postData(`/api/signup`, {
         firstname: data.firstname,
         lastname: data.lastname,
         email: data.email,

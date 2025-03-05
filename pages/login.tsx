@@ -2,8 +2,6 @@ import { useState } from "react";
 import Layout from "../layouts/Main";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
-// import { server } from "../utils/server";
-// import { postData } from "../utils/services";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 import Image from "next/image";
@@ -44,11 +42,6 @@ const LoginPage = () => {
       toast.error(error.message || "Something Went Wrong!");
       setIsLoading(false);
     }
-
-    // const res = await postData(`${server}/api/login`, {
-    //   email: data.email,
-    //   password: data.password,
-    // });
   };
 
   const handleGoogleSignIn = async () => {
