@@ -32,7 +32,7 @@ const RegisterPage = () => {
         password: data.password,
       });
       if (result?.message) {
-        router.push("/");
+        router.push("/login");
         toast.success(result?.message || "Successfully LoggedIn!");
       }
       setIsLoading(false);
