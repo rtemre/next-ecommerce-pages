@@ -94,7 +94,7 @@ const Footer = () => {
 
       <div className="site-footer__bottom">
         <div className="container">
-          <p>COPYRIGHT - © 2024. ALL RIGHTS RESERVED.</p>
+          <p>COPYRIGHT - © 2025. ALL RIGHTS RESERVED.</p>
         </div>
       </div>
     </footer>
