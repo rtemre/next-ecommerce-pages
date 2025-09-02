@@ -44,6 +44,8 @@ const Subscribe = () => {
     } catch (error: any) {
       toast.error(error.message);
       setIsLoading(false);
+    } finally {
+      setIsLoading(false);
     }
   }
   return (

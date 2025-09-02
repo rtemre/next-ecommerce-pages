@@ -17,9 +17,12 @@ type ProductPageType = {
   product: ProductType;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps = async ({ query, req }) => {
   const pid = query.pid;
-  const res = await fetch(`/api/product/${pid}`);
+  const host = req.headers.host;
+  const protocol = (req.headers["x-forwarded-proto"] as string) || "http";
+  const baseUrl = `${protocol}://${host}`;
+  const res = await fetch(`${baseUrl}/api/product/${pid}`);
   const product = await res.json();
 
   return {
