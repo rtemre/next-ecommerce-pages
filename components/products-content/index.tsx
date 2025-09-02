@@ -22,7 +22,7 @@ const ProductsContent = () => {
     }, 300);
 
     return () => clearTimeout(timeout);
-  }, [search, sort, show]);
+  }, [search, sort, show, router]);
 
   const showOptions = useMemo(() => [12, 24, 36], []);
 
