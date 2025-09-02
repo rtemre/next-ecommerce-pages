@@ -26,6 +26,8 @@ const ProductsContent = () => {
 
   const showOptions = useMemo(() => [12, 24, 36], []);
 
+  const clearSearch = () => setSearch("");
+
   return (
     <section className="products-content">
       <div className="products-content__intro">
@@ -44,13 +46,19 @@ const ProductsContent = () => {
         >
           <div className="products__filter__select">
             <h4>Search: </h4>
-            <div className="select-wrapper">
+            <div className="select-wrapper select-wrapper--search">
               <input
                 type="text"
                 placeholder="Search products..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
+                autoComplete="off"
               />
+              {search && (
+                <button type="button" className="clear-input-btn" onClick={clearSearch} aria-label="Clear search">
+                  <i className="icon-cancel"></i>
+                </button>
+              )}
             </div>
           </div>
           <div className="products__filter__select">
